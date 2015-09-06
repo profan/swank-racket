@@ -58,13 +58,13 @@
                [(list 'swank:swank-require swank-repl) 
                 `(:return (:ok nil) ,continuation)]
                
-               [(list 'swank:create-repl nil) 
+               [(list (or 'swank:create-repl 'swank-repl:create-repl) nil)
                 `(:return (:ok "Racket" "Racket") ,continuation)]
                
                [(list 'swank:operator-arglist fn _) 
                 `(:return (:ok "([x])") ,continuation)]
                
-               [(list 'swank:listener-eval code) 
+               [(list (or 'swank:listener-eval 'swank-repl:listener-eval) code)
                 `(:return (:ok (:values ,(evaluate to-repl from-repl code))) ,continuation)]
                
                [(list 'swank:eval-and-grab-output code)
